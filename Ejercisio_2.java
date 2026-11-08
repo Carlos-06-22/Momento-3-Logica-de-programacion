@@ -27,6 +27,15 @@ public class Ejercisio_2 {
         String NuevaMarca;
         boolean Encontrado;
 
+        System.out.println("==============VENTA DIRECTA KLIIKER - GRUPO URIBE===================");
+        System.out.println("|=============1)Listar Marcas Disponibles==========================|");
+        System.out.println("|=============2)Buscar Marca en Lote===============================|");
+        System.out.println("|=============3)Ingresar Marca al Lote=============================|");
+        System.out.println("|=============4)Salir==============================================|");
+        System.out.println("|=============Ingrese una opción: =================================|");
+        System.out.println("|==================================================================|");
+        Respuesta = Leer.nextInt();
+
     }
 }
 
