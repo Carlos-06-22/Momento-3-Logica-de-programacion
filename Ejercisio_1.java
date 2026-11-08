@@ -38,7 +38,56 @@ public class Ejercisio_1 {
         System.out.println("|==================================================================|");
         Respuesta = Leer.nextInt();
 
-    }
+        switch (Respuesta) {
 
-    
+            case 1:
+                System.out.println("===Listado de Referencias Disponibles===");
+                for (String Referencia : Referencias) {
+                    if (Referencia != null) {
+                        System.out.println(Referencia);
+                    }
+                }
+                break;
+
+            case 2:
+                System.out.println("Ingrese el nombre de la referencia a buscar:");
+                ReferenciaBuscada = Leer.next();
+                System.out.println("===Resultado de la Búsqueda===");
+                if (Buscar(Referencias, ReferenciaBuscada)) {
+                    System.out.println("La referencia " + ReferenciaBuscada + " se encuentra en el lote.");
+                } else {
+                    System.out.println("La referencia " + ReferenciaBuscada + " no se encuentra en el lote.");
+                }
+                break;
+
+            case 3:
+                System.out.println("Ingrese el nombre de la referencia a ingresar:");
+                NuevaReferencia = Leer.next();
+                Encontrado = false;
+                for (int i = 0; i < Referencias.length; i++) {
+                    if (Referencias[i] == null) {
+                        Referencias[i] = NuevaReferencia;
+                        Encontrado = true;
+                        System.out.println("La referencia " + NuevaReferencia + " ha sido ingresada al lote.");
+                        break;
+                    }
+                }
+                if (!Encontrado) {
+                    System.out.println("No hay espacio disponible para ingresar la referencia " + NuevaReferencia + ".");
+                }
+                break;
+            
+            case 4:
+                System.out.println("Saliendo del programa...");
+                break;
+
+            default:
+                System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
+                break;
+
+        }while (Respuesta != 4);
+        
+        Leer.close();
+
+    }
 }
