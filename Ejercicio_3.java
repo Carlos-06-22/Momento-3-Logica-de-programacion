@@ -2,14 +2,14 @@
 
 import java.util.Scanner;
 
-public class Ejercisio_3 {
 
-    public static boolean Buacar (String[] Productos, String NombreBuscado) {
+public class Ejercicio_3 {
+
+    public static boolean Buscar(String[] Productos, String NombreBuscado) {
 
         for (String Prenda : Productos) {
 
-            if (NombreBuscado.equals(Prenda)) {
-
+            if (Prenda != null && Prenda.equalsIgnoreCase(NombreBuscado)) {
                 return true;
             }
         }
@@ -21,21 +21,27 @@ public class Ejercisio_3 {
 
         Scanner Leer = new Scanner(System.in);
 
-        String[] Productos =  {"Jeans AirFlex", "Graphic Tee", "Denim Jacket", null, null};
-        int Respuesta;
+        String[] Productos = {"Jeans AirFlex", "Graphic Tee", "Denim Jacket", null, null};
+        int Respuesta = 0;
         String NombreBuscado;
         String NuevaPrenda;
-        boolean Encontrado;
-        do {
+        boolean Ingresada;
 
+        do {
+            System.out.println();
             System.out.println("==============GESTOR DE LOTES AMERICAN EAGLE========================");
-            System.out.println("|=============1)Listar Coleccion de Bodega=========================|");
-            System.out.println("|=============2)Buscar Referencia en Lote==========================|");
-            System.out.println("|=============3)Ingresar Prenda al Lote============================|");
-            System.out.println("|=============4)Salir==============================================|");
-            System.out.println("|=============Ingrese una opción: =================================|");
+            System.out.println("|=============1) Listar Colección de Bodega========================|");
+            System.out.println("|=============2) Buscar Referencia en Lote========================|");
+            System.out.println("|=============3) Ingresar Prenda al Lote==========================|");
+            System.out.println("|=============4) Salir============================================|");
             System.out.println("|==================================================================|");
-            Respuesta = Leer.nextInt();
+            System.out.print("Ingrese una opción: ");
+
+            try {
+                Respuesta = Integer.parseInt(Leer.nextLine().trim());
+            } catch (NumberFormatException e) {
+                Respuesta = 0; // cae en el default
+            }
 
             switch (Respuesta) {
 
@@ -50,9 +56,9 @@ public class Ejercisio_3 {
 
                 case 2:
                     System.out.println("Ingrese el nombre de la prenda a buscar:");
-                    NombreBuscado = Leer.next();
+                    NombreBuscado = Leer.nextLine().trim();
                     System.out.println("===Resultado de la Búsqueda===");
-                    if (Buacar(Productos, NombreBuscado)) {
+                    if (Buscar(Productos, NombreBuscado)) {
                         System.out.println("La prenda " + NombreBuscado + " se encuentra en el lote.");
                     } else {
                         System.out.println("La prenda " + NombreBuscado + " no se encuentra en el lote.");
@@ -61,17 +67,23 @@ public class Ejercisio_3 {
 
                 case 3:
                     System.out.println("Ingrese el nombre de la prenda a ingresar:");
-                    NuevaPrenda = Leer.next();
-                    Encontrado = false;
+                    NuevaPrenda = Leer.nextLine().trim();
+
+                    if (NuevaPrenda.isEmpty()) {
+                        System.out.println("La prenda no puede estar vacía.");
+                        break;
+                    }
+
+                    Ingresada = false;
                     for (int i = 0; i < Productos.length; i++) {
                         if (Productos[i] == null) {
                             Productos[i] = NuevaPrenda;
-                            Encontrado = true;
+                            Ingresada = true;
                             System.out.println("La prenda ha sido ingresada correctamente.");
                             break;
                         }
                     }
-                    if (!Encontrado) {
+                    if (!Ingresada) {
                         System.out.println("No hay espacio disponible en la caja para ingresar la prenda.");
                     }
                     break;
@@ -79,15 +91,14 @@ public class Ejercisio_3 {
                 case 4:
                     System.out.println("Saliendo del programa...");
                     break;
-                
+
                 default:
                     System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
                     break;
             }
-            
-        }while (Respuesta != 4);
+
+        } while (Respuesta != 4);
 
         Leer.close();
-        
     }
 }
